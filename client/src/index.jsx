@@ -109,7 +109,7 @@ class App extends React.Component {
     if (inAverageRange.length === 8) {
       bpm += ' BPM';
     } else {
-      bpm = 'That was some nice clicking, but a little too creative to set beats per minute. Please try again.';
+      bpm = 'Your clicking was a little too creative to set BPM. Try again.';
     }
     this.setState({
       displayBpm: true,

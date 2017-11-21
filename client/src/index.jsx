@@ -109,7 +109,7 @@ class App extends React.Component {
     if (inAverageRange.length === 8) {
       bpm += ' BPM';
     } else {
-      bpm = 'That was some nice clicking, but a little too creative to get a beat. Please try again.';
+      bpm = 'That was some nice clicking, but a little too creative to set beats per minute. Please try again.';
     }
     this.setState({
       displayBpm: true,
@@ -133,9 +133,9 @@ class App extends React.Component {
 
      return (
       <div onClick={this.noteClickTime} id='bigBtn'>
-        <button onClick={this.startListening} id='setBeat' disabled={this.state.btnDisabled}>Set the Beat</button>
-        {this.state.displayCount ? <div id="countDown" >{this.state.clicksLeft}</div> : <div></div>}
-        {this.state.displayBpm ? <div id='bpm' >{this.state.bpm}</div> : <div></div>}
+        <button onClick={this.startListening} id='setBeat' disabled={this.state.btnDisabled}>set the BEAT</button>
+        {this.state.displayCount ? <div className="center"><div id="countDown" >{this.state.clicksLeft} <div style={{fontSize: '.08em'}}>CLICKS LEFT</div></div></div> : <div></div>}
+        {this.state.displayBpm ? <div className="center"><div id='bpm' >{this.state.bpm}</div></div> : <div></div>}
       </div>
     )
   }

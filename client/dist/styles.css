@@ -3,7 +3,7 @@ html, body {
   padding:0;
   height:100%;
   width: 100%;
-  background-color: #c9c9c9;
+  background-color: #006699;
   font-family: 'Libre Franklin', sans-serif;
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
@@ -19,33 +19,41 @@ html, body {
   position: absolute;
   top: 0;
   z-index: 1000;
-  margin-left: 25%;
-  margin-top: 20px;
-  padding: 20px 10px;
-  width: 50%;
+  margin-left: 20%;
+  margin-top: 50px;
+  padding: 20px 0px;
+  width: 60%;
   border-radius: 6px;
-  font-size: 1.1em;
+  font-size: 1.4em;
 }
 
 button {
   font-family: 'Libre Franklin', sans-serif;
   transition:all 1s ease;
+  color: #003366;
+  font-weight: bold;
 }
 
 button:disabled, button[disabled] {
-  border: 1px solid #999;
+  border: 2px solid #0099cc;
   background-color: transparent;
-  color: #999;
+  color: #0099cc;
 }
 
 #countDown {
   z-index: 1000;
-  font-size: 12em;
-  color: #666666;
+  font-size: 15em;
+  color: #fff;
+  line-height: .55em;
+  margin-top: 25%;
+}
+
+.center {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 40%;
+  height: 100%;
+  text-align: center;
 }
 
 
@@ -57,23 +65,25 @@ button:disabled, button[disabled] {
 #bpm {
   font-size: 2.2em;
   position: relative;
-  top: 40%;
   text-align: center;
-  width: 100%;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 30px;
+  border-top: 2px #0099cc solid;
+  border-bottom: 2px #0099cc solid;
+  margin: 0 40px;
+  color: #fff;
 }
 
 @-webkit-keyframes flash {
   0% {
-      background-color: #ccc;
+      background-color: #006699;
       opacity:1;
   }
   50% {
-      background-color: white;
+      background-color: #0099cc;
   }
   100% {
-      background-color: #ccc;
+      background-color: #006699;
   }
 }
 

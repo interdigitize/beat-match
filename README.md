@@ -1,3 +1,3 @@
-# Beat Match
+# BPM Calculator
 
-Calculates beats per minute (BPM) based on screen clicks. 
+Calculates beats per minute (BPM) based on screen clicks.

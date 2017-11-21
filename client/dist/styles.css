@@ -1,0 +1,85 @@
+html, body {
+  margin: 0;
+  padding:0;
+  height:100%;
+  width: 100%;
+  background-color: #c9c9c9;
+  font-family: 'Libre Franklin', sans-serif;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;
+}
+
+#app {
+  height: 100%;
+}
+
+#setBeat {
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  margin-left: 25%;
+  margin-top: 20px;
+  padding: 20px 10px;
+  width: 50%;
+  border-radius: 6px;
+  font-size: 1.1em;
+}
+
+button {
+  font-family: 'Libre Franklin', sans-serif;
+  transition:all 1s ease;
+}
+
+button:disabled, button[disabled] {
+  border: 1px solid #999;
+  background-color: transparent;
+  color: #999;
+}
+
+#countDown {
+  z-index: 1000;
+  font-size: 12em;
+  color: #666666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40%;
+}
+
+
+#bigBtn {
+  width: 100%;
+  height: 100%;
+}
+
+#bpm {
+  font-size: 2.2em;
+  position: relative;
+  top: 40%;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+@-webkit-keyframes flash {
+  0% {
+      background-color: #ccc;
+      opacity:1;
+  }
+  50% {
+      background-color: white;
+  }
+  100% {
+      background-color: #ccc;
+  }
+}
+
+.flash {
+    -webkit-animation-name: flash;
+    -webkit-animation-duration: 100ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+}

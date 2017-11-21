@@ -6,6 +6,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
+        btnDisabled: false,
+        displayCount: false,
+        clicksLeft: 9,
+        displayBpm: false,
+        bpm: null,
+        btnClasses: '',
+
     };
     this.count = this.count.bind(this);
     this.increment = this.increment.bind(this);
@@ -15,13 +22,11 @@ class App extends React.Component {
     this.timeInterval = [];
     this.runClock = false;
     this.clock = 0;
-    this.clicksLeft = 9;
-    this.bpm = null;
     this.counter;
 
 }
   increment() {
-    if(this.runClock){
+    if (this.runClock) {
       this.clock = this.clock + 1;
     }
   }
@@ -31,10 +36,19 @@ class App extends React.Component {
   }
 
   startListening() {
+    this.setState({
+      displayCount: true,
+      btnDisabled: true,
+      bpm: null,
+      displayBpm: false,
+    });
+
     if (this.runClock === false) {
       this.timeInterval = [];
       this.runClock = true;
-      this.bpm = null;
+      this.setState({
+        bpm: null
+      })
       this.count();
       this.updateClickCount();
     }
@@ -44,7 +58,7 @@ class App extends React.Component {
   }
   noteClickTime() {
     if(this.runClock === false) {
-    } else if (this.timeInterval.length > 6) {
+    } else if (this.timeInterval.length > 7) {
       this.markTheBeat();
       this.updateClickCount();
       this.runClock = false;
@@ -57,22 +71,33 @@ class App extends React.Component {
     }
   }
   updateClickCount() {
-    this.clicksLeft--;
-    $('#clickCount').html('clicks left' + '\n' + this.clicksLeft);
+    let numLeft = this.state.clicksLeft;
+    this.setState({
+      clicksLeft: --numLeft,
+      btnClasses: 'flash'
+    })
+    // this.setState({
+    //   btnClasses: ''
+    // })
   }
 
   reset(){
     this.timeInterval = [];
     this.runClock = false;
     this.clock = 0;
-    this.clicksLeft = 9;
-    this.bpm = null;
+    this.setState({
+      btnDisabled: false,
+      displayCount: false,
+      clicksLeft: 9,
+      bpm: null
+    });
   }
-
 
   calculateBPM(intervalArr) {
     this.timeInterval.shift();
+    this.timeInterval.shift();
     this.timeInterval.push(intervalArr[intervalArr.length - 1]);
+    console.log('timeInterval:', this.timeInterval)
     var totalTime8beats = intervalArr.reduce((sum, interval) => sum
       + interval);
     var bpm = Math.floor(60000 / ((totalTime8beats * 10) / 8));
@@ -82,18 +107,35 @@ class App extends React.Component {
       interval > (intervalAverage - 10);
     });
     if (inAverageRange.length === 8) {
-      $('#clickCount').text(bpm + ' bpm');
+      bpm += ' BPM';
     } else {
-      $('#clickCount').text('That was some nice clicking, but a little too creative to get a pulse. Please try again.');
+      bpm = 'That was some nice clicking, but a little too creative to get a beat. Please try again.';
     }
-    this.reset();
+    this.setState({
+      displayBpm: true,
+      bpm: bpm
+    }, this.reset())
+
   }
 
   render () {
-    return (
-      <div >
-        <button onClick={this.startListening}>Set the Beat</button>
-        <div onClick={this.noteClickTime} id="clickCount">{this.clicksLeft}</div>
+    if (this.state.btnDisabled) {
+      console.log('clicksLeft', this.state.clicksLeft);
+      $("#bigBtn").click(function() {
+        $("#bigBtn").removeClass("flash");
+        setTimeout(function() {
+          $("#bigBtn").addClass("flash");
+        }, 1);
+      });
+    } else {
+      $( "#bigBtn").unbind( "click" );
+    }
+
+     return (
+      <div onClick={this.noteClickTime} id='bigBtn'>
+        <button onClick={this.startListening} id='setBeat' disabled={this.state.btnDisabled}>Set the Beat</button>
+        {this.state.displayCount ? <div id="countDown" >{this.state.clicksLeft}</div> : <div></div>}
+        {this.state.displayBpm ? <div id='bpm' >{this.state.bpm}</div> : <div></div>}
       </div>
     )
   }
